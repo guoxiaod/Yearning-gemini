@@ -213,7 +213,7 @@
             this.checkAllWithDDL(this.permission.ddl_source)
             this.checkAllWithDML(this.permission.dml_source)
             this.checkAllWithPerson(this.permission.auditor)
-            this.queryParams = Object.assign({}, vl.query_params)
+            this.queryParams = Object.assign({}, vl.query_params || {limit_count: 0, ex_query_time: 0})
         }
 
         mounted() {
