@@ -32,6 +32,15 @@
                         <Form-item label="密码:" prop="password">
                             <Input v-model="general.password" placeholder="请输入" type="password"></Input>
                         </Form-item>
+                        <Form-item label="链接参数:" prop="params">
+                            <Input v-model="general.params" placeholder="请输入"></Input>
+                        </Form-item>
+                        <Form-item label="查询最大Limit限制:" prop="limit_count">
+                            <InputNumber v-model="general.limit_count" placeholder="请输入"></InputNumber>
+                        </Form-item>
+                        <Form-item label="查询超时时间:" prop="ex_query_time">
+                            <InputNumber v-model="general.ex_query_time"  placeholder="请输入"></InputNumber>
+                        </Form-item>
                         <Form-item label="数据源类型:" prop="is_query">
                             <RadioGroup v-model="general.is_query">
                                 <Radio :label="2">读写</Radio>
@@ -88,7 +97,7 @@
 
         <Modal v-model="is_open" :width="500" okText="保存" @on-ok="modifyBase">
             <h3 slot="header" style="color:#2D8CF0">数据库连接信息</h3>
-            <Form :label-width="100" label-position="right">
+            <Form :label-width="160" label-position="right">
                 <FormItem label="环境">
                     <Input v-model="edit_base_info.idc" readonly></Input>
                 </FormItem>
@@ -107,6 +116,15 @@
                 <FormItem label="密码:">
                     <Input v-model="edit_base_info.password" type="password"></Input>
                 </FormItem>
+                <FormItem label="链接参数:">
+                    <Input v-model="edit_base_info.params"></Input>
+                </FormItem>
+                <FormItem label="查询最大Limit限制:">
+                    <InputNumber class='ivu-input-wrapper' v-model="edit_base_info.limit_count"></InputNumber>
+                </FormItem>
+                <FormItem label="查询超时时间(s):">
+                    <InputNumber class='ivu-input-wrapper' v-model="edit_base_info.ex_query_time"></InputNumber>
+                </FormItem>
             </Form>
         </Modal>
 
@@ -123,6 +141,9 @@
         port: string,
         username: string,
         password: string,
+        params: string,
+        limit_count: number,
+        ex_query_time: number,
     }
 
     const regExp_Name = (rule: any, value: any, callback: any) => {
@@ -141,6 +162,10 @@
         } else {
             callback()
         }
+    };
+
+    const regExp_params = (rule: any, value: any, callback: any) => {
+        callback()
     };
 
     @Component
@@ -222,6 +247,13 @@
                     validator: regExp_password,
                     trigger: 'blur'
                 }
+            ],
+            params: [
+                {
+                    validator: regExp_params,
+                    message: '链接参数格式错误',
+                    trigger: 'blur'
+                }
             ]
         };
         comList = [];
@@ -236,7 +268,10 @@
                 'ip': this.general.ip,
                 'username': this.general.username,
                 'password': this.general.password,
-                'port': parseInt(this.general.port)
+                'params': this.general.params,
+                'port': parseInt(this.general.port),
+                'limit_count': this.general.limit_count,
+                'ex_query_time': this.general.ex_query_time,
             })
                 .then((res: { data: string; }) => {
                     this.$config.notice(res.data)
@@ -258,6 +293,9 @@
                         'password': this.general.password,
                         'port': parseInt(this.general.port),
                         'is_query': this.general.is_query,
+                        'params': this.general.params,
+                        'limit_count': this.general.limit_count,
+                        'ex_query_time': this.general.ex_query_time,
                     })
                         .then((res: { data: string; }) => {
                             this.$config.notice(res.data);

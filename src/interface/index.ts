@@ -60,6 +60,11 @@ interface Permissions_check_all {
     auditor: boolean
 }
 
+interface QueryParams {
+    limit_count: number,
+    ex_query_time: number
+}
+
 interface Permission {
     [ddl_source: string]: string[],
 
@@ -107,6 +112,7 @@ export {
     test_results,
     Permissions_check_all,
     Permission,
+    QueryParams,
     Connection_list,
     Fetch_data,
     High_light,

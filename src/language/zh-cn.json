@@ -11,7 +11,7 @@
   "password": "密码",
   "pin": "验证码",
   "login": "登录",
-  "ldap": "ldap登录",
+  "ldap": "LDAP登录",
   "sponsor_title": "让Yearning持续提供更好的功能与服务",
   "sponsor_1": "赞助后你可以得到的",
   "sponsor_2": "联系作者将自己的名字添加到赞助者名单中\n\n      对于顶级赞助商，可将公司或个人logo添加到项目首页README当中，并优先考虑对该企业或个人的需求进行开发。",

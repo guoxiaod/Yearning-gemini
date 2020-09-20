@@ -1,5 +1,5 @@
 import {Component, Mixins} from "vue-property-decorator";
-import {Permission, Permissions_check_all, Connection_list} from "@/interface";
+import {Permission, QueryParams, Permissions_check_all, Connection_list} from "@/interface";
 import att_mixins from "@/mixins/basic";
 
 @Component({components: {}})
@@ -9,7 +9,7 @@ export default class choose_mixins extends Mixins(att_mixins) {
 
     indeterminate: Permissions_check_all = {
         ddl_source: true,
-        dml_source: true,
+        dml_source: true, 
         query_source: true,
         auditor: true
     };
@@ -19,6 +19,11 @@ export default class choose_mixins extends Mixins(att_mixins) {
         dml_source: false,
         query_source: false,
         auditor: false
+    };
+
+    queryParams: QueryParams = {
+        limit_count: 0,
+        ex_query_time: 0
     };
 
     permission: Permission = {

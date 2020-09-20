@@ -111,6 +111,14 @@
                         </Checkbox>
                     </CheckboxGroup>
                 </FormItem>
+                <hr style="height:1px;border:none;border-top:1px dashed #dddee1;"/>
+                <br>
+                <FormItem label="查询超时时间(s):">
+                    <InputNumber class='ivu-input-wrapper' v-model="queryParams.ex_query_time"></InputNumber>
+                </FormItem>
+                <FormItem label="查询最大Limit限制:">
+                    <InputNumber class='ivu-input-wrapper' v-model="queryParams.limit_count" ></InputNumber>
+                </FormItem>
             </Form>
         </Modal>
     </div>
@@ -159,6 +167,7 @@
             this.$http.post(`${this.$config.url}/group/update`, {
                 'username': this.addAuthGroupForm.group_name,
                 'permission': this.permission,
+                'query_params': this.queryParams,
                 'tp': 1
             })
                 .then((res: { data: string; }) => {
@@ -195,7 +204,7 @@
             this.current_page();
         }
 
-        editAuthGroup(vl: { name: string; permissions: any; }) {
+        editAuthGroup(vl: { name: string; permissions: any; query_params: any}) {
             this.isReadOnly = true;
             this.addAuthGroupForm.open = true;
             this.addAuthGroupForm.group_name = vl.name;
@@ -204,6 +213,7 @@
             this.checkAllWithDDL(this.permission.ddl_source)
             this.checkAllWithDML(this.permission.dml_source)
             this.checkAllWithPerson(this.permission.auditor)
+            this.queryParams = Object.assign({}, vl.query_params)
         }
 
         mounted() {

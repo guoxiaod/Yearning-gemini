@@ -116,7 +116,10 @@ export default class att_mixins extends Vue {
         name: '',
         data_base: '',
         table: '',
-        row: 0
+        row: 0,
+        params: '',
+        limit_count: 0,
+        ex_query_time: 0,
     }
 
     is_open = false;

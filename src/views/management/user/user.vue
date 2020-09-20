@@ -176,7 +176,11 @@
             checkbox: '',
             department: '',
             mail: '',
-            real_name: ''
+            real_name: '',
+            query_params: {
+                limit_count: 0,
+                ex_query_time: 0,
+            }
         };
         userInfoValidate = {
             username: [{
@@ -279,7 +283,10 @@
 
         del_disabled = true
 
-        payload = {} as any
+        payload = {query_params:{
+            limit_count: 0,
+            ex_query_time: 0,
+        }} as any
 
         depend_list = {} as DependUser
 
@@ -290,6 +297,10 @@
 
         edit_user(row: any) {
             this.payload = JSON.parse(JSON.stringify(row))
+            this.payload.query_params = this.payload.query_params || {
+                limit_count: 0,
+                ex_query_time: 0,
+            }
             this.payload.multi = this.connectionList.multi
             this.is_edit = true;
         }

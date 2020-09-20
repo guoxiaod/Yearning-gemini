@@ -28,6 +28,12 @@
             <FormItem label="E-mail" prop="email">
                 <Input v-model="edit.email" placeholder="请输入邮箱"></Input>
             </FormItem>
+            <FormItem label="查询最大Limit限制" prop="limit_count">
+                <InputNumber class='ivu-input-wrapper' v-model="edit.query_params.limit_count"></InputNumber>
+            </FormItem>
+            <FormItem label="查询超时时间(s)" prop="ex_query_time">
+                <InputNumber class='ivu-input-wrapper' v-model="edit.query_params.ex_query_time"></InputNumber>
+            </FormItem>
         </Form>
     </Modal>
 </template>
@@ -39,7 +45,12 @@ import att_mixins from "@/mixins/basic";
 @Component({components: {}})
 export default class edit_info extends Mixins(att_mixins) {
 
-    edit: any = {}
+    edit: any = {
+        query_params: {
+            limit_count: 0,
+            ex_query_time: 0,
+        }
+    }
 
     @Prop({
         required: true,
@@ -70,6 +81,7 @@ export default class edit_info extends Mixins(att_mixins) {
             'department': this.edit.department,
             'real_name': this.edit.real_name,
             'mail': this.edit.email,
+            'query_params': this.edit.query_params,
             'tp': 'info'
         })
             .then((res: { data: string; }) => {

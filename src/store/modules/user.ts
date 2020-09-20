@@ -1,6 +1,6 @@
 import {Module, VuexModule, Mutation, getModule} from 'vuex-module-decorators'
 import store from "@/store";
-
+import { QueryParams } from '@/interface';
 
 interface Edit {
     id?: number
@@ -10,6 +10,7 @@ interface Edit {
     rule?: string
     email?: string
     password?: string
+    query_params?: QueryParams
 }
 
 @Module({namespaced: true, name: 'modules_user', dynamic: true, store})
@@ -22,7 +23,11 @@ class user extends VuexModule {
         real_name: '',
         rule: '',
         email: '',
-        password: ''
+        password: '',
+        query_params: {
+            limit_count: 0,
+            ex_query_time: 0,
+        }
     }
 
     @Mutation

@@ -55,11 +55,11 @@
                             <Card style="margin-left: 5%">
                                 <p slot="title">LDAP设置</p>
                                 <Form :label-width="120">
-                                    <FormItem label="服务地址url">
+                                    <FormItem label="LDAP服务地址">
                                         <Input placeholder="[ip地址或者域名]:[端口号]" v-model="ldap.url"></Input>
                                     </FormItem>
                                     <FormItem>
-                                        <Checkbox v-model="ldap.ldaps">启用ldaps</Checkbox>
+                                        <Checkbox v-model="ldap.ldaps">启用StartTLS</Checkbox>
                                     </FormItem>
                                     <FormItem label="LDAP管理员DN:">
                                         <Input placeholder="请填写管理员DN" v-model="ldap.user"></Input>
@@ -67,12 +67,15 @@
                                     <FormItem label="LDAP管理员密码:">
                                         <Input placeholder="请填写管理员密码" v-model="ldap.password" type="password"></Input>
                                     </FormItem>
-                                    <FormItem label="LDAP_Search filter:">
+                                    <FormItem label="用户名字段:">
                                         <Select v-model="ldap.type">
                                             <Option :value=1>sAMAccountName</Option>
                                             <Option :value=2>uid</Option>
                                             <Option :value=3>cn</Option>
                                         </Select>
+                                    </FormItem>
+                                    <FormItem label="用户搜索条件:">
+                                        <Input placeholder="请填写用户搜索条件" v-model="ldap.filter"></Input>
                                     </FormItem>
                                     <FormItem label="LDAP_SCBASE:">
                                         <Input placeholder="LDAP Search Base" v-model="ldap.sc"></Input>
