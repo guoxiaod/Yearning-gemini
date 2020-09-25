@@ -74,7 +74,8 @@
 </template>
 
 <script lang="ts">
-    import Csv from 'view-design/src/utils/csv'
+    //import Csv from 'view-design/src/utils/csv'
+    //import Csv from '@/libs/csv'
     import ExportCsv from 'view-design/src/components/table/export-csv'
     import editor from "@/components/editor.vue";
     import {Component, Mixins, Prop} from "vue-property-decorator";
@@ -82,6 +83,69 @@
     // eslint-disable-next-line no-unused-vars
     import {CreateElement} from "vue";
     import module_general from "@/store/modules/general";
+
+    const newLine = '\r\n';
+    const appendLine = (content: any, row: any, params: any) => {
+        let separator = params.separator || ','
+        let quoted = params.quoted || false
+        const line = row.map((data: any) => {
+            if (!quoted) return data;
+            // quote data
+            data = typeof data === 'string' ? data.replace(/"/g, '""') : data;
+            if (typeof data !== 'string') {
+                data = "" + data
+            }
+            if (data.length > 10 && /^\d+$/.test(data)) {
+                data = "'" + data
+            }
+            return `"${data}"`;
+        });
+        content.push(line.join(separator));
+    };
+
+    const defaults = {
+        separator: ',',
+        quoted: false
+    };
+
+    function Csv(columns: any, datas: any, options: any, noHeader = false) {
+        options = Object.assign({}, defaults, options);
+        let columnOrder: any;
+        const content: any = [];
+        const column: any = [];
+
+        if (columns) {
+            columnOrder = columns.map((v: any) => {
+                if (typeof v === 'string') return v;
+                if (!noHeader) {
+                    column.push(typeof v.title !== 'undefined' ? v.title : v.key);
+                }
+                return v.key;
+            });
+            if (column.length > 0) appendLine(content, column, options);
+        } else {
+            columnOrder = [];
+            datas.forEach((v: any) => {
+                if (!Array.isArray(v)) {
+                    columnOrder = columnOrder.concat(Object.keys(v));
+                }
+            });
+            if (columnOrder.length > 0) {
+                columnOrder = columnOrder.filter((value: any, index: any, self: any) => self.indexOf(value) === index);
+                if (!noHeader) appendLine(content, columnOrder, options);
+            }
+        }
+
+        if (Array.isArray(datas)) {
+            datas.forEach(row => {
+                if (!Array.isArray(row)) {
+                    row = columnOrder.map(k => (typeof row[k] !== 'undefined' ? row[k] : ''));
+                }
+                appendLine(content, row, options);
+            });
+        }
+        return content.join(newLine);
+    }
 
     const export_csv = function exportCsv(this: any, params: any) {
         if (params.filename) {
@@ -216,6 +280,7 @@
             export_csv({
                 filename: 'Yearning_Data',
                 original: true,
+                quoted: true,
                 data: this.allQueryData,
                 columns: this.columnsName
             })
