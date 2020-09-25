@@ -139,7 +139,7 @@
         if (Array.isArray(datas)) {
             datas.forEach(row => {
                 if (!Array.isArray(row)) {
-                    row = columnOrder.map(k => (typeof row[k] !== 'undefined' ? row[k] : ''));
+                    row = columnOrder.map((k: any) => (typeof row[k] !== 'undefined' ? row[k] : ''));
                 }
                 appendLine(content, row, options);
             });
