@@ -74,6 +74,15 @@
                                             <Option :value=3>cn</Option>
                                         </Select>
                                     </FormItem>
+                                    <FormItem label="姓名字段:">
+                                        <Input placeholder="请填写姓名字段" v-model="ldap.name"></Input>
+                                    </FormItem>
+                                    <FormItem label="部门字段:">
+                                        <Input placeholder="请填写部门字段" v-model="ldap.department"></Input>
+                                    </FormItem>
+                                    <FormItem label="邮箱字段:">
+                                        <Input placeholder="请填写邮箱字段" v-model="ldap.email"></Input>
+                                    </FormItem>
                                     <FormItem label="用户搜索条件:">
                                         <Input placeholder="请填写用户搜索条件" v-model="ldap.filter"></Input>
                                     </FormItem>
