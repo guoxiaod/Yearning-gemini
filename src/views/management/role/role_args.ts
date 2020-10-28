@@ -181,6 +181,18 @@ const rule: Rule[] = [
         tp: 1
     },
     {
+        name: 'DMLMaxInsertRows',
+        desc: 'Insert最大插入行数上限',
+        type: 'DML',
+        tp: 1
+    },
+    {
+        name: 'DDLImplicitTypeConversion',
+        desc: '不允许隐式转换',
+        type: 'DML',
+        tp: 0
+    },
+    {
         name: 'DMLInsertColumns',
         desc: '检查Insert语句中插入的字段名是否存在',
         type: 'DML',
