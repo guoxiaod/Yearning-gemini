@@ -50,7 +50,7 @@
                 orient: 'horizontal',
                 left: 'center',
                 bottom: 10,
-                data: [i18n.t('dash.axis.dml'), i18n.t('dash.axis.ddl'), i18n.t('dash.axis.query')]
+                data: [i18n.t('dash.axis.ddl'), i18n.t('dash.axis.dml'), i18n.t('dash.axis.query')]
               },
               series: [
                 {
