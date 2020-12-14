@@ -219,32 +219,32 @@ export default class tabQuery extends Mixins(att_mixins) {
     fieldColumns = [
         {
             title: '字段名',
-            key: 'field'
+            key: 'Field'
         },
         {
             title: '字段类型',
-            key: 'type',
+            key: 'Type',
             editable: true
         },
         {
             title: '字段是否为空',
-            key: 'null',
+            key: 'Null',
             editable: true,
             option: true
         },
         {
             title: '默认值',
-            key: 'default',
+            key: 'Default',
             editable: true
         },
         {
             title: '索引类型',
-            key: 'key',
+            key: 'Key',
             editable: true
         },
         {
             title: '备注',
-            key: 'comment'
+            key: 'Comment'
         }
     ]
     queryTime = ''
