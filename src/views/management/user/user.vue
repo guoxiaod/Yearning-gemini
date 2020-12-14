@@ -51,7 +51,7 @@
                 <Button @click="queryData" type="primary" class="margin-left-10">查询</Button>
                 <Button @click="queryCancel" type="warning" class="margin-left-10">重置</Button>
                 <div class="edittable-con-1">
-                    <Table border :columns="columns" :data="table_data" stripe height="520">
+                    <Table border :columns="columns" :data="table_data" stripe>
                         <template slot-scope="{ row }" slot="rule">
                             <span v-if="row.rule === 'admin'">操作人</span>
                             <span v-else-if="row.rule === 'guest'">提交人</span>
