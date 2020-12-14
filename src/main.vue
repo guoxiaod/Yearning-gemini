@@ -32,6 +32,19 @@
                             <Icon type="md-lock" :size="20"></Icon>
                         </Tooltip>
                     </div>
+                    <div class="user-dropdown-menu-con">
+                        <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
+                            <Dropdown trigger="click" @on-click="handleClickUserDropdown">
+                                <a href="javascript:void(0)">
+                                    <Avatar :style="{background: color}">{{ userName }}</Avatar>
+                                    <Icon type="md-arrow-dropdown"/>
+                                </a>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem name="loginout">{{$t('banner.login_out')}}</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </Row>
+                    </div>
                 </div>
             </div>
         </div>
