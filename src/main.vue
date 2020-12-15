@@ -34,9 +34,7 @@
                     </div>
                     <div class="user-dropdown-menu-con" style="margin-right:1em;">
                         <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
-                            <a href="javascript:void(0)">
-                                <Avatar :style="{background: color}">{{ userName }}</Avatar>
-                            </a>
+                            {{ userName }}
                         </Row>
                     </div>
                 </div>
