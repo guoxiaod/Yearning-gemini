@@ -268,8 +268,11 @@ export default class tabQuery extends Mixins(att_mixins) {
         }
         this.$http.get(`${this.$config.url}/query/table_info?base=${this.dataBase}&table=${this.table}&source=${this.source}`)
             .then((res: { data: never[]; }) => {
+                this.queryTime = "0"
                 this.columnsName = this.fieldColumns;
-                this.queryRes = res.data
+                this.allQueryData = res.data
+                this.queryRes = this.allQueryData.slice(0, this.page_size)
+                this.total = res.data.length
                 this.$Message.success({content: "已获取表结构!"})
             })
             .catch((err: any) => {
