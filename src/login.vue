@@ -352,6 +352,7 @@ export default class login extends Mixins(att_mixins) {
                 sessionStorage.setItem('jwt', `Bearer ${res.data.token}`);
                 sessionStorage.setItem('auth', res.data['permissions']);
                 sessionStorage.setItem('real_name', res.data['real_name']);
+                localStorage.setItem('single', this.single ? 'true' : 'false')
                 let auth = res.data['permissions'];
                 if (auth === 'guest') {
                     sessionStorage.setItem('access', '1');
@@ -372,6 +373,7 @@ export default class login extends Mixins(att_mixins) {
 
     mounted() {
         let windows: any = window;
+        this.single = localStorage.getItem("single") == 'true'
         windows.particlesJS.load('band', `${process.env.BASE_URL}particlesjs-config.json`);
         this.$http
             .get(`${this.$config.gen}/fetch`)
